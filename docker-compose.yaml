@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  nats:
+    image: nats:2.10.12-alpine3.19
+    container_name: nats-server
+    ports:
+      - "4222:4222" # Client port
+      - "8222:8222" # Monitoring port
+      - "6222:6222" # Cluster port
+    command: -js -DV
+    networks:
+      - nats-network
+
+networks:
+  nats-network:
+    name: nats-network
+    driver: bridge
